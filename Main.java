@@ -10,13 +10,14 @@ public class Main {
 		Scanner scn = new Scanner(System.in);
 		String str[] = scn.nextLine().split(" ");
 		int n = str.length, j = 0;
-		double arr[][] = new double[n+2][n+1], min = Double.MAX_VALUE;
+		double arr[][] = new double[n+2][n+1], min = Double.MAX_VALUE,r[][]= new double[n+2][n+1];
 //		for(int i=0;i<n+2;i++)
 //			for(int k=0;k<n+1;k++)
 				//arr[i][k]=-1;
 		for(int i=1;i<=n;i++) {
 			arr[i][i - 1] = 0;
 			arr[i][i]=Double.parseDouble(str[i-1]);
+			r[i][i]=i;
 		}
 		//	0.375 0.375 0.125 0.125
 
@@ -32,6 +33,7 @@ public class Main {
 						for (int o = i; o <= j; o++)
 							tot += arr[o][o];
 						arr[i][j] = (arr[i][m - 1] + arr[m + 1][j]) + tot;
+						r[i][j]=m;
 						System.out.println((arr[i][m - 1] + arr[m + 1][j]) + tot);
 					}
 				}
@@ -39,9 +41,16 @@ public class Main {
 			}
 		}
 
-		for (int i = 0; i < 6; i++) {
-			for (int a = 0; a < 5; a++) {
+		for (int i = 1; i < n+2; i++) {
+			for (int a = 0; a < n+1; a++) {
 				System.out.printf("%-8.3f",arr[i][a]);
+			}
+			System.out.println();
+		}
+		System.out.println();
+		for (int i = 1; i < n+2; i++) {
+			for (int a = 0; a < n+1; a++) {
+				System.out.printf("%-3.0f",r[i][a]);
 			}
 			System.out.println();
 		}
