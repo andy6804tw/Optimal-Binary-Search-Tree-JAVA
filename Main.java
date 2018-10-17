@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -10,14 +7,12 @@ public class Main {
 		Scanner scn = new Scanner(System.in);
 		String str[] = scn.nextLine().split(" ");
 		int n = str.length, j = 0;
-		double arr[][] = new double[n+2][n+1], min = Double.MAX_VALUE,r[][]= new double[n+2][n+1];
-//		for(int i=0;i<n+2;i++)
-//			for(int k=0;k<n+1;k++)
-				//arr[i][k]=-1;
+		double A[][] = new double[n+2][n+1], min = Double.MAX_VALUE,R[][]= new double[n+2][n+1];
+
 		for(int i=1;i<=n;i++) {
-			arr[i][i - 1] = 0;
-			arr[i][i]=Double.parseDouble(str[i-1]);
-			r[i][i]=i;
+			A[i][i - 1] = 0; // 對角線為0
+			A[i][i]=Double.parseDouble(str[i-1]); // 自己本身的權重
+			R[i][i]=i;
 		}
 		//	0.375 0.375 0.125 0.125
 
@@ -25,16 +20,17 @@ public class Main {
 			for (int i = 1; i <= n - diagonal; i++) {
 				j = i + diagonal;
 				min = Double.MAX_VALUE;
-				for (int m = i; m <= j; m++) {
-					System.out.println(i + " " + j + "  " + (arr[i][m - 1] + arr[m + 1][j]));
-					if ((arr[i][m - 1] + arr[m + 1][j]) < min) {
-						min = arr[i][m - 1] + arr[m + 1][j];
+				for (int k = i; k <= j; k++) { //比較尋找最小權重值
+					System.out.println(i + " " + j + "  " + (A[i][k - 1] + A[k + 1][j]));
+					if ((A[i][k - 1] + A[k + 1][j]) < min) { // 比較出最小的存入陣列中
+						min = A[i][k - 1] + A[k + 1][j];
+						// tot計算加總
 						double tot = 0.0;
 						for (int o = i; o <= j; o++)
-							tot += arr[o][o];
-						arr[i][j] = (arr[i][m - 1] + arr[m + 1][j]) + tot;
-						r[i][j]=m;
-						System.out.println((arr[i][m - 1] + arr[m + 1][j]) + tot);
+							tot += A[o][o];
+						A[i][j] = (A[i][k - 1] + A[k + 1][j]) + tot;
+						R[i][j]=k;
+						System.out.println((A[i][k - 1] + A[k + 1][j]) + tot);
 					}
 				}
 				System.out.println();
@@ -43,22 +39,18 @@ public class Main {
 
 		for (int i = 1; i < n+2; i++) {
 			for (int a = 0; a < n+1; a++) {
-				System.out.printf("%-8.3f",arr[i][a]);
+				System.out.printf("%-8.3f",A[i][a]);
 			}
 			System.out.println();
 		}
 		System.out.println();
-		for (int i = 1; i < n+2; i++) {
+		for (int i = 0; i < n+2; i++) {
 			for (int a = 0; a < n+1; a++) {
-				System.out.printf("%-3.0f",r[i][a]);
+				System.out.printf("%-3.0f",R[i][a]);
 			}
 			System.out.println();
 		}
 
 	}
-
-  public static void optsearchtree(int n, float p[], float minAvg) {
-
-  }
 
 }
