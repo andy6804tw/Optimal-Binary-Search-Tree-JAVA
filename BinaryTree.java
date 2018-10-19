@@ -32,7 +32,11 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 前序走訪 2 / \ 1 3 前序 = 2 -> 1 -> 3
+	 * 前序走訪
+	 *   2
+	 *  / \
+	 * 1   3 
+	 * 前序 = 2 -> 1 -> 3
 	 **/
 	public void preOrderTree(Node focusNode) {
 		if (focusNode != null) {
@@ -43,7 +47,11 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 中序走訪 2 / \ 1 3 中序 = 1 -> 2 -> 3
+	 * 中序走訪 
+	 *	2
+	 * / \
+	 *1   3 
+	 *中序 = 1 -> 2 -> 3
 	 **/
 	public void inOrderTree(Node focusNode) {
 		if (focusNode != null) {
@@ -54,7 +62,11 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 後序走訪 2 / \ 1 3 後序 = 1 -> 3 -> 2
+	 * 後序走訪 
+	 *  2
+	 * / \ 
+	 *1   3
+	 *後序 = 1 -> 3 -> 2
 	 **/
 	public void postOrderTree(Node focusNode) {
 		if (focusNode != null) {
