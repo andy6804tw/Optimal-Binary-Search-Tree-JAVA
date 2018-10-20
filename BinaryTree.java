@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class BinaryTree {
 
-	static Node root;
+	Node root;
 	int COUNT = 10;
 
 	public void addNode(int key, String name) {
@@ -151,9 +151,9 @@ public class BinaryTree {
 		System.out.println();
 		theTree.print2(theTree.root, 0);
 
-		int height = root.getHeight();
+		int height = theTree.root.getHeight();
 		System.out.println(height);
-		root.prettyPrint(height);
+		theTree.root.prettyPrint(height);
 
 	}
 }
