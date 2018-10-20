@@ -1,4 +1,8 @@
+import java.util.LinkedHashSet;
 import java.util.Scanner;
+import java.util.Set;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Main {
 
@@ -50,6 +54,35 @@ public class Main {
 			}
 			System.out.println();
 		}
+		
+		call(R,n);
+
+	}
+	
+	public static void call(double R[][], int n) {
+
+		Set<Integer> set = new LinkedHashSet<Integer>();
+		for (int i = 1; i < n + 1; i++) {
+			for (int j = n; j >= i; j--) {
+				set.add((int) R[i][j]);
+			}
+		}
+		BinaryTree theTree = new BinaryTree();
+		for(Integer element : set) {
+			theTree.addNode(element,"");
+	    }
+		System.out.print("PreOrder: ");
+		theTree.preOrderTree(theTree.root); // 前序走訪的遞迴方法
+		System.out.print("\nInOrder: ");
+		theTree.inOrderTree(theTree.root); // 中序走訪
+		System.out.print("\nPostOrder: ");
+		theTree.postOrderTree(theTree.root); // 後序走訪
+		System.out.println();
+		theTree.print2(theTree.root ,0);
+		
+		int height = theTree.root.getHeight();
+		System.out.println(height);
+		theTree.root.prettyPrint(height);
 
 	}
 
