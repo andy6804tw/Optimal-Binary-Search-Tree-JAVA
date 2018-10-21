@@ -248,5 +248,4 @@ class Node {
   }
 
 }
-
 // https://stackoverflow.com/questions/13484943/print-a-binary-tree-in-a-pretty-way
