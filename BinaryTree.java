@@ -3,11 +3,6 @@ import java.util.Scanner;
 public class BinaryTree {
 
 	Node root;
-	int COUNT = 10;
-	int key[] = { 1, 2, 3, 4 };
-	static String value[] = { "0.375", "0.375", "0.125", "0.125" };
-	static int R[][] = { { 0, 0, 0, 0, 0 }, { 0, 1, 1, 2, 2 }, { 0, 0, 2, 2, 2 }, { 0, 0, 0, 3, 3 }, { 0, 0, 0, 0, 4 },
-			{ 0, 0, 0, 0, 0 } };
 
 	public Node addNode(int i, int j, int R[][], String value[]) {
 
@@ -15,7 +10,7 @@ public class BinaryTree {
 		if (k == 0)
 			return null;
 		else {
-			Node newNode = new Node(key[k - 1], value[k - 1]);
+			Node newNode = new Node(k, value[k - 1]);
 			newNode.leftChild = addNode(i, k - 1, R, value);
 			newNode.rightChild = addNode(k + 1, j, R, value);
 			return newNode;
@@ -62,13 +57,13 @@ public class BinaryTree {
 			return;
 
 		// Increase distance between levels
-		space += COUNT;
+		space += 10;
 		// Process right child first
 		print(focusNode.rightChild, space);
 		// Print current node after space
 		// count
 		System.out.println();
-		for (int i = COUNT; i < space; i++)
+		for (int i = 10; i < space; i++)
 			System.out.printf(" ");
 		System.out.print(focusNode.key);
 		// Process left child
@@ -119,33 +114,7 @@ public class BinaryTree {
 	}
 
 	public static void main(String[] args) {
-		BinaryTree theTree = new BinaryTree();
-
-		// theTree.addNode(50, "Boss");
-		// theTree.addNode(25, "Vice President");
-		// theTree.addNode(15, "Office Manager");
-		// theTree.addNode(30, "Office Manager");
-		// theTree.addNode(75, "Secretary");
-		// theTree.addNode(85, "Sales Manager");
-		// theTree.addNode(6, "Salesman 1");
-		// theTree.addNode(7, "Salesman 1");
-		// theTree.addNode(9, "Salesman 1");
-		// theTree.addNode(9, "Salesman 1");
-
-		theTree.root = theTree.addNode(1, 4, R, value);
-		System.out.print("PreOrder: ");
-		theTree.preOrderTree(theTree.root); // 前序走訪的遞迴方法
-		System.out.print("\nInOrder: ");
-		theTree.inOrderTree(theTree.root); // 中序走訪
-		System.out.print("\nPostOrder: ");
-		theTree.postOrderTree(theTree.root); // 後序走訪
-		System.out.println();
-		theTree.print2(theTree.root, 0);
-
-		int height = theTree.root.getHeight();
-		System.out.println(height);
-		theTree.root.prettyPrint(height);
-
+		
 	}
 }
 
