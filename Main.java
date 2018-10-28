@@ -9,22 +9,23 @@ public class Main {
 	public static void main(String[] args) {
 
 		Scanner scn = new Scanner(System.in);
-		String str[] = scn.nextLine().split(" ");
-		int n = str.length, j = 0;
-		double A[][] = new double[n+2][n+1], min = Double.MAX_VALUE,R[][]= new double[n+2][n+1];
+		String value[] = scn.nextLine().split(" ");
+		int n = value.length, j = 0;
+		double A[][] = new double[n + 2][n + 1], min = Double.MAX_VALUE;
+		int R[][] = new int[n + 2][n + 1];
 
-		for(int i=1;i<=n;i++) {
+		for (int i = 1; i <= n; i++) {
 			A[i][i - 1] = 0; // 對角線為0
-			A[i][i]=Double.parseDouble(str[i-1]); // 自己本身的權重
-			R[i][i]=i;
+			A[i][i] = Double.parseDouble(value[i - 1]); // 自己本身的權重
+			R[i][i] = i;
 		}
-		//	0.375 0.375 0.125 0.125
+		// 0.375 0.375 0.125 0.125
 
 		for (int diagonal = 1; diagonal <= n - 1; diagonal++) {
 			for (int i = 1; i <= n - diagonal; i++) {
 				j = i + diagonal;
 				min = Double.MAX_VALUE;
-				for (int k = i; k <= j; k++) { //比較尋找最小權重值
+				for (int k = i; k <= j; k++) { // 比較尋找最小權重值
 					System.out.println(i + " " + j + "  " + (A[i][k - 1] + A[k + 1][j]));
 					if ((A[i][k - 1] + A[k + 1][j]) < min) { // 比較出最小的存入陣列中
 						min = A[i][k - 1] + A[k + 1][j];
@@ -33,7 +34,7 @@ public class Main {
 						for (int o = i; o <= j; o++)
 							tot += A[o][o];
 						A[i][j] = (A[i][k - 1] + A[k + 1][j]) + tot;
-						R[i][j]=k;
+						R[i][j] = k;
 						System.out.println((A[i][k - 1] + A[k + 1][j]) + tot);
 					}
 				}
@@ -41,36 +42,28 @@ public class Main {
 			}
 		}
 
-		for (int i = 1; i < n+2; i++) {
-			for (int a = 0; a < n+1; a++) {
-				System.out.printf("%-8.3f",A[i][a]);
+		for (int i = 1; i < n + 2; i++) {
+			for (int a = 0; a < n + 1; a++) {
+				System.out.printf("%-8.3f", A[i][a]);
 			}
 			System.out.println();
 		}
 		System.out.println();
-		for (int i = 0; i < n+2; i++) {
-			for (int a = 0; a < n+1; a++) {
-				System.out.printf("%-3.0f",R[i][a]);
+		for (int i = 0; i < n + 2; i++) {
+			for (int a = 0; a < n + 1; a++) {
+				System.out.printf("%d,", R[i][a]);
 			}
 			System.out.println();
 		}
-		
-		call(R,n);
+
+		call(R, value, n);
 
 	}
-	
-	public static void call(double R[][], int n) {
 
-		Set<Integer> set = new LinkedHashSet<Integer>();
-		for (int i = 1; i < n + 1; i++) {
-			for (int j = n; j >= i; j--) {
-				set.add((int) R[i][j]);
-			}
-		}
+	public static void call(int R[][], String value[], int n) {
 		BinaryTree theTree = new BinaryTree();
-		for(Integer element : set) {
-			theTree.addNode(element,"");
-	    }
+
+		theTree.root = theTree.addNode(1, n, R, value);
 		System.out.print("PreOrder: ");
 		theTree.preOrderTree(theTree.root); // 前序走訪的遞迴方法
 		System.out.print("\nInOrder: ");
@@ -78,8 +71,8 @@ public class Main {
 		System.out.print("\nPostOrder: ");
 		theTree.postOrderTree(theTree.root); // 後序走訪
 		System.out.println();
-		theTree.print2(theTree.root ,0);
-		
+		theTree.print2(theTree.root, 0);
+
 		int height = theTree.root.getHeight();
 		System.out.println(height);
 		theTree.root.prettyPrint(height);

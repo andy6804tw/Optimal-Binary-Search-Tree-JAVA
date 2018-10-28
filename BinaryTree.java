@@ -4,31 +4,21 @@ public class BinaryTree {
 
 	Node root;
 	int COUNT = 10;
+	int key[] = { 1, 2, 3, 4 };
+	static String value[] = { "0.375", "0.375", "0.125", "0.125" };
+	static int R[][] = { { 0, 0, 0, 0, 0 }, { 0, 1, 1, 2, 2 }, { 0, 0, 2, 2, 2 }, { 0, 0, 0, 3, 3 }, { 0, 0, 0, 0, 4 },
+			{ 0, 0, 0, 0, 0 } };
 
-	public void addNode(int key, String name) {
+	public Node addNode(int i, int j, int R[][], String value[]) {
 
-		Node newNode = new Node(key, name);
-		if (root == null) { // 建立根節點
-			root = newNode;
-		} else { // 建立子數
-			Node focusNode = root;
-			Node parent;
-			while (true) {
-				parent = focusNode;
-				if (key < focusNode.key) {
-					focusNode = focusNode.leftChild; // 小於放左邊
-					if (focusNode == null) {
-						parent.leftChild = newNode; // 判斷左子樹是否有值，若無則新增Node
-						return;
-					}
-				} else {
-					focusNode = focusNode.rightChild; // 大於放右邊
-					if (focusNode == null) {
-						parent.rightChild = newNode; // 判斷右子樹是否有值，若無則新增Node
-						return;
-					}
-				}
-			}
+		int k = R[i][j];
+		if (k == 0)
+			return null;
+		else {
+			Node newNode = new Node(key[k - 1], value[k - 1]);
+			newNode.leftChild = addNode(i, k - 1, R, value);
+			newNode.rightChild = addNode(k + 1, j, R, value);
+			return newNode;
 		}
 
 	}
@@ -131,17 +121,18 @@ public class BinaryTree {
 	public static void main(String[] args) {
 		BinaryTree theTree = new BinaryTree();
 
-		theTree.addNode(50, "Boss");
-		theTree.addNode(25, "Vice President");
-		theTree.addNode(15, "Office Manager");
-		theTree.addNode(30, "Office Manager");
-		theTree.addNode(75, "Secretary");
-		theTree.addNode(85, "Sales Manager");
+		// theTree.addNode(50, "Boss");
+		// theTree.addNode(25, "Vice President");
+		// theTree.addNode(15, "Office Manager");
+		// theTree.addNode(30, "Office Manager");
+		// theTree.addNode(75, "Secretary");
+		// theTree.addNode(85, "Sales Manager");
 		// theTree.addNode(6, "Salesman 1");
 		// theTree.addNode(7, "Salesman 1");
 		// theTree.addNode(9, "Salesman 1");
 		// theTree.addNode(9, "Salesman 1");
 
+		theTree.root = theTree.addNode(1, 4, R, value);
 		System.out.print("PreOrder: ");
 		theTree.preOrderTree(theTree.root); // 前序走訪的遞迴方法
 		System.out.print("\nInOrder: ");
@@ -161,14 +152,14 @@ public class BinaryTree {
 class Node {
 
 	int key; // 節點資料
-	String name; // 節點名稱
+	String value; // 節點名稱
 	Node leftChild; // 左子樹
 	Node rightChild; // 右子樹
 	// 建構子
 
-	Node(int key, String name) {
+	Node(int key, String value) {
 		this.key = key;
-		this.name = name;
+		this.value = value;
 	}
 
 	public int getHeight() {
@@ -251,11 +242,9 @@ class Node {
 	}
 
 	public String toString() {
-		return name + " has the key " + key;
+		return value + " has the key " + key;
 	}
 
 }
 
-// http://www.newthinktank.com/2013/03/binary-tree-in-java/
 // https://stackoverflow.com/questions/13484943/print-a-binary-tree-in-a-pretty-way
-// https://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram
