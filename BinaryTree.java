@@ -1,18 +1,19 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BinaryTree {
 
 	Node root;
 
-	public Node addNode(int i, int j, int R[][], String value[]) {
+	public Node addNode(int i, int j, int R[][], ArrayList<Integer> key, ArrayList<Double> value) {
 
 		int k = R[i][j];
 		if (k == 0)
 			return null;
 		else {
-			Node newNode = new Node(k, value[k - 1]);
-			newNode.leftChild = addNode(i, k - 1, R, value);
-			newNode.rightChild = addNode(k + 1, j, R, value);
+			Node newNode = new Node(key.get(k-1), value.get(k - 1));
+			newNode.leftChild = addNode(i, k - 1, R,key, value);
+			newNode.rightChild = addNode(k + 1, j, R,key, value);
 			return newNode;
 		}
 
@@ -121,12 +122,12 @@ public class BinaryTree {
 class Node {
 
 	int key; // 節點資料
-	String value; // 節點名稱
+	double value; // 節點名稱
 	Node leftChild; // 左子樹
 	Node rightChild; // 右子樹
 	// 建構子
 
-	Node(int key, String value) {
+	Node(int key, double value) {
 		this.key = key;
 		this.value = value;
 	}
