@@ -25,3 +25,40 @@ Output:
 演算法跑完後隨即印出陣列A(最佳平均時間)與印出陣列R(二元樹根節點)，最後再依據陣列R建立一棵樹並繪製出來。
 
 <img src="./screenshot/img01.PNG">
+
+
+### drawTree() 函式
+此函式呼叫自己所建立的 BinaryTree 類別建立一棵樹並走訪(前序、中序、後序)依序顯示出來，最後再用遞迴方式將樹印出來。
+
+<img src="./screenshot/img02.PNG">
+
+### BinaryTree 類別
+為了程式好維護與和Optimal BST演算法區隔所以我另外寫一隻JAVA類別來處理樹，以下分別說明如何建立一個Node以及新增一個Node還有使用遞迴走訪(preOrderTree、inOrderTree、postOrderTree)及印出一棵樹。
+
+
+#### addNode() 新增節點
+我們使用Optimal BST演算法求出來的二陣列R來建立一棵樹，第7行是建立一個新的Node，第8和9行分別使用遞迴方式建構左右子樹值到k值等於0為止。
+
+<img src="./screenshot/img03.PNG">
+
+
+#### 樹的走訪
+為了驗證我所建立的樹是正確所以分別寫出前序、中序、後序走訪來驗證。
+
+- 前序
+
+  前序走訪先印出節點內容，再依序使用遞迴走訪左子樹再走訪右子樹
+
+<img src="./screenshot/img04.PNG">
+
+- 中序
+
+  先遞迴走訪左子樹，再印出節點內容，最後再走訪右子樹
+
+<img src="./screenshot/img05.PNG">
+
+- 後序
+  
+  依序使用遞迴走訪左子樹再走訪右子樹，最後再印出節點內容。
+
+<img src="./screenshot/img06.PNG">

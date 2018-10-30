@@ -16,7 +16,7 @@ public class BinaryTree {
 			newNode.rightChild = addNode(k + 1, j, R,key, value);
 			return newNode;
 		}
-		
+
 	}
 
 	/**
@@ -94,22 +94,6 @@ public class BinaryTree {
 				System.out.println(" \\");
 				print2(focusNode.leftChild, space + 4);
 			}
-		}
-
-	}
-
-	public void print3(Node focusNode, int space) {
-
-		if (focusNode != null) {
-			if (focusNode.leftChild != null)
-				print3(focusNode.leftChild, space + 4);
-			if (focusNode.rightChild != null)
-				print3(focusNode.rightChild, space + 4);
-			if (space > 0) {
-				for (int i = 0; i < space; i++)
-					System.out.printf(" ");
-			}
-			System.out.printf("%d\n ", focusNode.key);
 		}
 
 	}
@@ -218,3 +202,4 @@ class Node {
 }
 
 // https://stackoverflow.com/questions/13484943/print-a-binary-tree-in-a-pretty-way
+// https://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram
