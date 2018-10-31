@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class BinarySearchTree {
 
@@ -104,7 +104,6 @@ public class BinarySearchTree {
 }
 
 class Node {
-
 	int key; // 節點資料
 	double value; // 節點名稱
 	Node leftChild; // 左子樹
@@ -127,16 +126,15 @@ class Node {
 		return Math.max(getHeight(root.leftChild), getHeight(root.rightChild)) + 1;
 	}
 
-	public void prettyPrint(int height) {
-		System.out.println(prettyPrint(this, 1, height));
+	public void printTree(int height) {
+		System.out.println(printTree(this, 1, height));
 	}
 
-	private StringBuilder prettyPrint(Node root, int currentHeight, int totalHeight) {
+	private StringBuilder printTree(Node root, int currentHeight, int totalHeight) {
 		StringBuilder sb = new StringBuilder();
 		int spaces = getSpaceCount(totalHeight - currentHeight + 1);
 		// 處理最底部沒有樹葉時給予空白
 		if (root == null) {
-			// create a 'spatial' block and return it
 			String row = String.format("%" + (2 * spaces + 1) + "s%n", "");
 			String block = new String(new char[spaces + 1]).replace("\0", row);
 			return new StringBuilder(block);
@@ -145,10 +143,8 @@ class Node {
 		if (currentHeight == totalHeight)
 			return new StringBuilder(root.key + "");
 		int slashes = getSlashCount(totalHeight - currentHeight + 1);
-		sb.append(String.format("%" + (spaces + 1) + "s%" + spaces + "s", root.key + "", ""));
-		sb.append("\n");
-		// now print / and \
-		// but make sure that left and right exists
+		sb.append(String.format("%" + (spaces + 1) + "s%" + spaces + "s", root.key + "", "") + "\n");
+		// 判斷是否有左右子樹，若有則需印出斜線
 		char leftSlash = root.leftChild == null ? ' ' : '/';
 		char rightSlash = root.rightChild == null ? ' ' : '\\';
 		int spaceInBetween = 1;
@@ -163,27 +159,25 @@ class Node {
 				sb.append(" ");
 			sb.append("\n");
 		}
-		// sb.append("\n");
 
-		// now get string representations of left and right subtrees
-		StringBuilder leftTree = prettyPrint(root.leftChild, currentHeight + 1, totalHeight);
-		StringBuilder rightTree = prettyPrint(root.rightChild, currentHeight + 1, totalHeight);
-		// now line by line print the trees side by side
-		Scanner leftScanner = new Scanner(leftTree.toString());
-		Scanner rightScanner = new Scanner(rightTree.toString());
-		// spaceInBetween+=1;
-		while (leftScanner.hasNextLine()) {
+		// 分別取得目前的左子樹及右子樹
+		StringBuilder leftTree = printTree(root.leftChild, currentHeight + 1, totalHeight);
+		StringBuilder rightTree = printTree(root.rightChild, currentHeight + 1, totalHeight);
+		// 字串切割分別將左右子樹分別地依據換行切開
+		StringTokenizer leftStringToken = new StringTokenizer(leftTree.toString(), "\r\n");
+		StringTokenizer rightStringToken = new StringTokenizer(rightTree.toString(), "\r\n");
+		// 進行左右子數每一行的合併
+		while (leftStringToken.hasMoreTokens()) {
 			if (currentHeight == totalHeight - 1) {
-				sb.append(String.format("%-2s %2s", leftScanner.nextLine(), rightScanner.nextLine()));
+				sb.append(String.format("%-2s %2s", leftStringToken.nextToken(), rightStringToken.nextToken()));
 				sb.append("\n");
 				spaceInBetween -= 2;
 			} else {
-				sb.append(leftScanner.nextLine());
+				sb.append(leftStringToken.nextToken());
 				sb.append(" ");
-				sb.append(rightScanner.nextLine() + "\n");
+				sb.append(rightStringToken.nextToken() + "\n");
 			}
 		}
-
 		return sb;
 	}
 
@@ -198,5 +192,3 @@ class Node {
 	}
 
 }
-
-// https://stackoverflow.com/questions/13484943/print-a-binary-tree-in-a-pretty-way
