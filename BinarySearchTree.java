@@ -11,9 +11,9 @@ public class BinarySearchTree {
 		if (k == 0)
 			return null;
 		else {
-			Node newNode = new Node(key.get(k-1), value.get(k - 1));
-			newNode.leftChild = addNode(i, k - 1, R,key, value);
-			newNode.rightChild = addNode(k + 1, j, R,key, value);
+			Node newNode = new Node(key.get(k - 1), value.get(k - 1));
+			newNode.leftChild = addNode(i, k - 1, R, key, value); // 新增左子樹節點
+			newNode.rightChild = addNode(k + 1, j, R, key, value); // 新增右子數節點
 			return newNode;
 		}
 
@@ -99,7 +99,7 @@ public class BinarySearchTree {
 	}
 
 	public static void main(String[] args) {
-		
+
 	}
 }
 
@@ -120,6 +120,7 @@ class Node {
 		return getHeight(this);
 	}
 
+	// 取得樹高
 	private int getHeight(Node root) {
 		if (root == null)
 			return 0;
@@ -133,13 +134,14 @@ class Node {
 	private StringBuilder prettyPrint(Node root, int currentHeight, int totalHeight) {
 		StringBuilder sb = new StringBuilder();
 		int spaces = getSpaceCount(totalHeight - currentHeight + 1);
+		// 處理最底部沒有樹葉時給予空白
 		if (root == null) {
 			// create a 'spatial' block and return it
 			String row = String.format("%" + (2 * spaces + 1) + "s%n", "");
-			// now repeat this row space+1 times
 			String block = new String(new char[spaces + 1]).replace("\0", row);
 			return new StringBuilder(block);
 		}
+		// 當到最後一層時直接印出key
 		if (currentHeight == totalHeight)
 			return new StringBuilder(root.key + "");
 		int slashes = getSlashCount(totalHeight - currentHeight + 1);
@@ -193,10 +195,6 @@ class Node {
 
 	private int getSpaceCount(int height) {
 		return (int) (3 * Math.pow(2, height - 2) - 1);
-	}
-
-	public String toString() {
-		return value + " has the key " + key;
 	}
 
 }
