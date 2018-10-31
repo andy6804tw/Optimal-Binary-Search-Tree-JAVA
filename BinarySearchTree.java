@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BinaryTree {
+public class BinarySearchTree {
 
 	Node root;
 
@@ -202,4 +202,3 @@ class Node {
 }
 
 // https://stackoverflow.com/questions/13484943/print-a-binary-tree-in-a-pretty-way
-// https://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram
