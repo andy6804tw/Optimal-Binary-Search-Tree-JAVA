@@ -67,7 +67,7 @@ public class Main {
 	}
 
 	public static void drawTree(int R[][], ArrayList<Integer> key, ArrayList<Double> value, int n) {
-		BinaryTree tree = new BinaryTree();
+		BinarySearchTree tree = new BinarySearchTree();
 
 		tree.root = tree.addNode(1, n, R,key, value);
 		System.out.print("\nPreOrder: ");
@@ -81,7 +81,7 @@ public class Main {
 
 		int height = tree.root.getHeight();
 		System.out.println("\nPrint Optimal Binary Search Tree:\n");
-		tree.root.prettyPrint(height);
+		tree.root.printTree(height);
 
 	}
 	public static void mergeSort(List<Integer> list, int left, int right,List<Double> value) {
@@ -131,4 +131,3 @@ public class Main {
 	}
 
 }
-// 0.375 0.375 0.125 0.125
