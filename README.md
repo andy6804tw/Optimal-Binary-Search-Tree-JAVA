@@ -28,7 +28,7 @@ Output:
 
 
 ### drawTree() 函式
-此函式呼叫自己所建立的 BinaryTree 類別建立一棵樹並走訪(前序、中序、後序)依序顯示出來，最後再用遞迴方式將樹印出來。
+此函式呼叫自己所建立的 BinarySearchTree 類別建立一棵樹並走訪(前序、中序、後序)依序顯示出來，最後再用遞迴方式將樹印出來。
 
 <img src="./screenshot/img02.PNG">
 
