@@ -13,7 +13,7 @@ public class BinarySearchTree {
 		else {
 			Node newNode = new Node(key.get(k - 1), value.get(k - 1));
 			newNode.leftChild = addNode(i, k - 1, R, key, value); // 新增左子樹節點
-			newNode.rightChild = addNode(k + 1, j, R, key, value); // 新增右子數節點
+			newNode.rightChild = addNode(k + 1, j, R, key, value); // 新增右子樹節點
 			return newNode;
 		}
 
