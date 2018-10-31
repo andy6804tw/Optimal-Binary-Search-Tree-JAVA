@@ -22,77 +22,77 @@ public class BinarySearchTree {
 	/**
 	 * 前序走訪 2 / \ 1 3 前序 = 2 -> 1 -> 3
 	 **/
-	public void preOrderTree(Node focusNode) {
-		if (focusNode != null) {
-			System.out.print(focusNode.key + " "); // 先印出節點內容
-			preOrderTree(focusNode.leftChild); // 再走訪左子樹
-			preOrderTree(focusNode.rightChild); // 再走訪右子樹
+	public void preOrderTree(Node currentNode) {
+		if (currentNode != null) {
+			System.out.print(currentNode.key + " "); // 先印出節點內容
+			preOrderTree(currentNode.leftChild); // 再走訪左子樹
+			preOrderTree(currentNode.rightChild); // 再走訪右子樹
 		}
 	}
 
 	/**
 	 * 中序走訪 2 / \ 1 3 中序 = 1 -> 2 -> 3
 	 **/
-	public void inOrderTree(Node focusNode) {
-		if (focusNode != null) {
-			inOrderTree(focusNode.leftChild); // 先走訪左子樹
-			System.out.print(focusNode.key + " "); // 印出節點內容
-			inOrderTree(focusNode.rightChild); // 再走訪右子樹
+	public void inOrderTree(Node currentNode) {
+		if (currentNode != null) {
+			inOrderTree(currentNode.leftChild); // 先走訪左子樹
+			System.out.print(currentNode.key + " "); // 印出節點內容
+			inOrderTree(currentNode.rightChild); // 再走訪右子樹
 		}
 	}
 
 	/**
 	 * 後序走訪 2 / \ 1 3 後序 = 1 -> 3 -> 2
 	 **/
-	public void postOrderTree(Node focusNode) {
-		if (focusNode != null) {
-			postOrderTree(focusNode.leftChild); // 先走訪左子樹
-			postOrderTree(focusNode.rightChild); // 再走訪右子樹
-			System.out.print(focusNode.key + " "); // 再印出節點內容
+	public void postOrderTree(Node currentNode) {
+		if (currentNode != null) {
+			postOrderTree(currentNode.leftChild); // 先走訪左子樹
+			postOrderTree(currentNode.rightChild); // 再走訪右子樹
+			System.out.print(currentNode.key + " "); // 再印出節點內容
 		}
 	}
 
-	public void print(Node focusNode, int space) {
+	public void print(Node currentNode, int space) {
 
-		if (focusNode == null)
+		if (currentNode == null)
 			return;
 
 		// Increase distance between levels
 		space += 10;
 		// Process right child first
-		print(focusNode.rightChild, space);
+		print(currentNode.rightChild, space);
 		// Print current node after space
 		// count
 		System.out.println();
 		for (int i = 10; i < space; i++)
 			System.out.printf(" ");
-		System.out.print(focusNode.key);
+		System.out.print(currentNode.key);
 		// Process left child
-		print(focusNode.leftChild, space);
+		print(currentNode.leftChild, space);
 
 	}
 
-	public void print2(Node focusNode, int space) {
+	public void print2(Node currentNode, int space) {
 
-		if (focusNode != null) {
-			if (focusNode.rightChild != null)
-				print2(focusNode.rightChild, space + 4);
+		if (currentNode != null) {
+			if (currentNode.rightChild != null)
+				print2(currentNode.rightChild, space + 4);
 			if (space > 0) {
 				for (int i = 0; i < space; i++)
 					System.out.printf(" ");
 			}
-			if (focusNode.rightChild != null) {
+			if (currentNode.rightChild != null) {
 				System.out.println(" /");
 				for (int i = 0; i < space; i++)
 					System.out.printf(" ");
 			}
-			System.out.printf("%d\n ", focusNode.key);
+			System.out.printf("%d\n ", currentNode.key);
 
-			if (focusNode.leftChild != null) {
+			if (currentNode.leftChild != null) {
 				for (int i = 0; i < space; i++)
 					System.out.printf(" ");
 				System.out.println(" \\");
-				print2(focusNode.leftChild, space + 4);
+				print2(currentNode.leftChild, space + 4);
 			}
 		}
 
